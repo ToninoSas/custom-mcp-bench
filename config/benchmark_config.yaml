@@ -39,7 +39,7 @@ execution:
   # Information compression retry count
   compression_retries: 2
   # Maximum execution rounds
-  max_execution_rounds: 20
+  max_execution_rounds: 10
   # Server concurrency semaphore limit
   server_semaphore_limit: 20
   # Sequential-only tools that cannot be called concurrently due to the limitations from server side
@@ -103,7 +103,7 @@ benchmark:
   # Enable concurrent content summarization for performance
   concurrent_summarization: true
   # Use fuzzy task descriptions instead of detailed descriptions
-  use_fuzzy_descriptions: true
+  use_fuzzy_descriptions: false
   # Enable concrete description reference for evaluation (provide original task as reference when using fuzzy descriptions)
   enable_concrete_description_ref_for_eval: true
   # Enable dependency analysis reference for evaluation (provide tool dependency analysis as reference)

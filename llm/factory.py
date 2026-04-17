@@ -67,46 +67,46 @@ class LLMFactory:
         configs = {}
         
         # Azure OpenAI models
-        if os.getenv("AZURE_OPENAI_API_KEY") and os.getenv("AZURE_OPENAI_ENDPOINT"):
-            configs["o4-mini"] = ModelConfig(
-                name="o4-mini",
-                provider_type="azure",
-                api_key=os.getenv("AZURE_OPENAI_API_KEY"),
-                endpoint=os.getenv("AZURE_OPENAI_ENDPOINT"),
-                deployment_name="o4-mini"
-            )
-            
-            configs["gpt-4o"] = ModelConfig(
-                name="gpt-4o",
-                provider_type="azure",
-                api_key=os.getenv("AZURE_OPENAI_API_KEY"),
-                endpoint=os.getenv("AZURE_OPENAI_ENDPOINT"),
-                deployment_name="gpt-4o"
-            )
-            
-            configs["gpt-4o-mini"] = ModelConfig(
-                name="gpt-4o-mini",
-                provider_type="azure",
-                api_key=os.getenv("AZURE_OPENAI_API_KEY"),
-                endpoint=os.getenv("AZURE_OPENAI_ENDPOINT"),
-                deployment_name="gpt-4o-mini"
-            )
-            
-            configs["o3"] = ModelConfig(
-                name="o3",
-                provider_type="azure",
-                api_key=os.getenv("AZURE_OPENAI_API_KEY"),
-                endpoint=os.getenv("AZURE_OPENAI_ENDPOINT"),
-                deployment_name="o3"
-            )
-        
-            configs["gpt-5"] = ModelConfig(
-                name="gpt-5",
-                provider_type="azure",
-                api_key=os.getenv("AZURE_OPENAI_API_KEY"),
-                endpoint=os.getenv("AZURE_OPENAI_ENDPOINT"),
-                deployment_name="gpt-5"
-            )
+#         if os.getenv("AZURE_OPENAI_API_KEY") and os.getenv("AZURE_OPENAI_ENDPOINT"):
+#             configs["o4-mini"] = ModelConfig(
+#                 name="o4-mini",
+#                 provider_type="azure",
+#                 api_key=os.getenv("AZURE_OPENAI_API_KEY"),
+#                 endpoint=os.getenv("AZURE_OPENAI_ENDPOINT"),
+#                 deployment_name="o4-mini"
+#             )
+#
+#             configs["gpt-4o"] = ModelConfig(
+#                 name="gpt-4o",
+#                 provider_type="azure",
+#                 api_key=os.getenv("AZURE_OPENAI_API_KEY"),
+#                 endpoint=os.getenv("AZURE_OPENAI_ENDPOINT"),
+#                 deployment_name="gpt-4o"
+#             )
+#
+#             configs["gpt-4o-mini"] = ModelConfig(
+#                 name="gpt-4o-mini",
+#                 provider_type="azure",
+#                 api_key=os.getenv("AZURE_OPENAI_API_KEY"),
+#                 endpoint=os.getenv("AZURE_OPENAI_ENDPOINT"),
+#                 deployment_name="gpt-4o-mini"
+#             )
+#
+#             configs["o3"] = ModelConfig(
+#                 name="o3",
+#                 provider_type="azure",
+#                 api_key=os.getenv("AZURE_OPENAI_API_KEY"),
+#                 endpoint=os.getenv("AZURE_OPENAI_ENDPOINT"),
+#                 deployment_name="o3"
+#             )
+#
+#             configs["gpt-5"] = ModelConfig(
+#                 name="gpt-5",
+#                 provider_type="azure",
+#                 api_key=os.getenv("AZURE_OPENAI_API_KEY"),
+#                 endpoint=os.getenv("AZURE_OPENAI_ENDPOINT"),
+#                 deployment_name="gpt-5"
+#             )
         
         # OpenRouter models
         if os.getenv("OPENROUTER_API_KEY"):
@@ -117,7 +117,17 @@ class LLMFactory:
                 base_url="https://openrouter.ai/api/v1",
                 model_name="qwen/qwen3-32b"
             )
-            
+
+            configs["qwen3.5-9b"] = ModelConfig(
+                name="qwen3.5-9b",
+                provider_type="openrouter",
+                api_key=os.getenv("OPENROUTER_API_KEY"),
+                # base_url="https://openrouter.ai/api/v1",
+                base_url ="http://localhost:11434/v1",
+                # model_name="qwen/qwen3.5-9b"
+                model_name="qwen3.5:9b"
+            )
+
             configs["qwen3-30b-a3b-instruct-2507"] = ModelConfig(
                 name="qwen3-30b-a3b-instruct-2507",
                 provider_type="openrouter",
@@ -125,7 +135,7 @@ class LLMFactory:
                 base_url="https://openrouter.ai/api/v1",
                 model_name="qwen/qwen3-30b-a3b-instruct-2507"
             )
-            
+
             configs["qwen3-235b-a22b-thinking-2507"] = ModelConfig(
                 name="qwen3-235b-a22b-thinking-2507",
                 provider_type="openrouter",
@@ -141,7 +151,7 @@ class LLMFactory:
                 base_url="https://openrouter.ai/api/v1",
                 model_name="qwen/qwen3-235b-a22b-2507"
             )
-            
+
             configs["gpt-oss-20b"] = ModelConfig(
                 name="gpt-oss-20b",
                 provider_type="openrouter",
@@ -149,7 +159,7 @@ class LLMFactory:
                 base_url="https://openrouter.ai/api/v1",
                 model_name="openai/gpt-oss-20b"
             )
-            
+
             configs["gpt-oss-120b"] = ModelConfig(
                 name="gpt-oss-120b",
                 provider_type="openrouter",
@@ -157,7 +167,7 @@ class LLMFactory:
                 base_url="https://openrouter.ai/api/v1",
                 model_name="openai/gpt-oss-120b"
             )
-            
+
             configs["kimi-k2"] = ModelConfig(
                 name="kimi-k2",
                 provider_type="openrouter",
@@ -165,7 +175,7 @@ class LLMFactory:
                 base_url="https://openrouter.ai/api/v1",
                 model_name="moonshotai/kimi-k2"
             )
-            
+
             configs["minimax-m1"] = ModelConfig(
                 name="minimax-m1",
                 provider_type="openrouter",
@@ -173,7 +183,7 @@ class LLMFactory:
                 base_url="https://openrouter.ai/api/v1",
                 model_name="minimax/minimax-m1"
             )
-            
+
             configs["nova-micro-v1"] = ModelConfig(
                 name="nova-micro-v1",
                 provider_type="openrouter",
@@ -181,7 +191,7 @@ class LLMFactory:
                 base_url="https://openrouter.ai/api/v1",
                 model_name="amazon/nova-micro-v1"
             )
-            
+
             configs["grok-3-mini"] = ModelConfig(
                 name="grok-3-mini",
                 provider_type="openrouter",
@@ -189,7 +199,7 @@ class LLMFactory:
                 base_url="https://openrouter.ai/api/v1",
                 model_name="x-ai/grok-3-mini"
             )
-            
+
             configs["gemini-2.5-flash-lite"] = ModelConfig(
                 name="gemini-2.5-flash-lite",
                 provider_type="openrouter",
@@ -197,7 +207,7 @@ class LLMFactory:
                 base_url="https://openrouter.ai/api/v1",
                 model_name="google/gemini-2.5-flash-lite"
             )
-            
+
             configs["gpt-5-mini-openrouter"] = ModelConfig(
                 name="gpt-5-mini-openrouter",
                 provider_type="openrouter",
@@ -205,7 +215,7 @@ class LLMFactory:
                 base_url="https://openrouter.ai/api/v1",
                 model_name="openai/gpt-5-mini"
             )
-            
+
             configs["gpt-5-nano"] = ModelConfig(
                 name="gpt-5-nano",
                 provider_type="openrouter",
@@ -213,7 +223,7 @@ class LLMFactory:
                 base_url="https://openrouter.ai/api/v1",
                 model_name="openai/gpt-5-nano"
             )
-            
+
             configs["deepseek-r1-0528"] = ModelConfig(
                 name="deepseek-r1-0528",
                 provider_type="openrouter",
@@ -221,7 +231,7 @@ class LLMFactory:
                 base_url="https://openrouter.ai/api/v1",
                 model_name="deepseek/deepseek-r1-0528"
             )
-            
+
             configs["deepseek-r1-0528-qwen3-8b"] = ModelConfig(
                 name="deepseek-r1-0528-qwen3-8b",
                 provider_type="openrouter",
@@ -229,7 +239,7 @@ class LLMFactory:
                 base_url="https://openrouter.ai/api/v1",
                 model_name="deepseek/deepseek-r1-0528-qwen3-8b"
             )
-            
+
             configs["ernie-4.5-21b-a3b"] = ModelConfig(
                 name="ernie-4.5-21b-a3b",
                 provider_type="openrouter",
@@ -237,7 +247,7 @@ class LLMFactory:
                 base_url="https://openrouter.ai/api/v1",
                 model_name="baidu/ernie-4.5-21b-a3b"
             )
-            
+
             configs["glm-4.5-air"] = ModelConfig(
                 name="glm-4.5-air",
                 provider_type="openrouter",
@@ -245,7 +255,7 @@ class LLMFactory:
                 base_url="https://openrouter.ai/api/v1",
                 model_name="z-ai/glm-4.5-air"
             )
-            
+
             configs["mistral-small-3.2-24b-instruct"] = ModelConfig(
                 name="mistral-small-3.2-24b-instruct",
                 provider_type="openrouter",
@@ -253,7 +263,7 @@ class LLMFactory:
                 base_url="https://openrouter.ai/api/v1",
                 model_name="mistralai/mistral-small-3.2-24b-instruct"
             )
-            
+
             configs["gemma-3-27b-it"] = ModelConfig(
                 name="gemma-3-27b-it",
                 provider_type="openrouter",
@@ -261,7 +271,7 @@ class LLMFactory:
                 base_url="https://openrouter.ai/api/v1",
                 model_name="google/gemma-3-27b-it"
             )
-            
+
             configs["qwq-32b"] = ModelConfig(
                 name="qwq-32b",
                 provider_type="openrouter",
@@ -269,7 +279,7 @@ class LLMFactory:
                 base_url="https://openrouter.ai/api/v1",
                 model_name="qwen/qwq-32b"
             )
-            
+
             configs["glm-4.5"] = ModelConfig(
                 name="glm-4.5",
                 provider_type="openrouter",
@@ -277,7 +287,7 @@ class LLMFactory:
                 base_url="https://openrouter.ai/api/v1",
                 model_name="z-ai/glm-4.5"
             )
-            
+
             configs["claude-sonnet-4"] = ModelConfig(
                 name="claude-sonnet-4",
                 provider_type="openrouter",
@@ -285,7 +295,7 @@ class LLMFactory:
                 base_url="https://openrouter.ai/api/v1",
                 model_name="anthropic/claude-sonnet-4"
             )
-            
+
             configs["gemini-2.5-pro"] = ModelConfig(
                 name="gemini-2.5-pro",
                 provider_type="openrouter",
@@ -293,6 +303,8 @@ class LLMFactory:
                 base_url="https://openrouter.ai/api/v1",
                 model_name="google/gemini-2.5-pro"
             )
+
+
         
         # Llama models
         llama_models = [

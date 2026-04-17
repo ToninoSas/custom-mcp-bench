@@ -110,7 +110,7 @@ class PersistentMultiServerManager:
             except Exception as e:
                 logger.error(f"ERROR in connecting to {server_name}: {e}")
                 import traceback
-                logger.error(f"Full traceback: {traceback.format_exc()}")
+                #logger.error(f"Full traceback: {traceback.format_exc()}")
         
         logger.info(f"Successfully connected to {successful_connections}/{len(self.server_configs)} servers with persistent sessions")
         logger.info(f"Total tools discovered: {len(self.all_tools)}")
@@ -171,7 +171,7 @@ class PersistentMultiServerManager:
         except Exception as e:
             logger.error(f"ERROR in connecting to STDIO server {server_name}: {e}")
             import traceback
-            logger.error(f"Full traceback: {traceback.format_exc()}")
+            #logger.error(f"Full traceback: {traceback.format_exc()}")
             raise
 
     async def _connect_http_server(self, server_name: str) -> Dict[str, Any]:
@@ -191,7 +191,7 @@ class PersistentMultiServerManager:
         except Exception as e:
             logger.error(f"ERROR in connecting to HTTP server {server_name}: {e}")
             import traceback
-            logger.error(f"Full traceback: {traceback.format_exc()}")
+            #logger.error(f"Full traceback: {traceback.format_exc()}")
             await connector.stop_http_server()
             raise
 

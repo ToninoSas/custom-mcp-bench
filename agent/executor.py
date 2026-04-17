@@ -480,7 +480,7 @@ class TaskExecutor:
                         logger.info(f"  - Tool `{tool_name}` on {server_name} call successful.")
                         # Print tool return value (max 1000 chars)
                         result_preview = result_text[:1000] + "..." if len(result_text) > 1000 else result_text
-                        logger.info(f"    Tool result: {result_preview}")
+                        #logger.info(f"    Tool result: {result_preview}")
                         return {"tool": tool_name, "server": server_name, "parameters": params, "round_num": round_num, "result": result_text, "success": True}
 
                 except Exception as e:

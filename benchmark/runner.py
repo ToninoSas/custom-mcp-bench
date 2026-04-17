@@ -196,7 +196,8 @@ class BenchmarkRunner:
         self.enable_judge_stability = enable_judge_stability if enable_judge_stability is not None else config_loader.is_judge_stability_enabled()
         self.filter_problematic_tools = filter_problematic_tools if filter_problematic_tools is not None else config_loader.is_problematic_tools_filter_enabled()
         self.concurrent_summarization = concurrent_summarization if concurrent_summarization is not None else config_loader.is_concurrent_summarization_enabled()
-        self.use_fuzzy_descriptions = use_fuzzy_descriptions if use_fuzzy_descriptions is not None else config_loader.use_fuzzy_descriptions()
+        # self.use_fuzzy_descriptions = use_fuzzy_descriptions if use_fuzzy_descriptions is not None else config_loader.use_fuzzy_descriptions()
+        self.use_fuzzy_descriptions = False
         self.enable_concrete_description_ref = config_loader.is_concrete_description_ref_enabled()
         self.commands_config = None
         
@@ -428,12 +429,20 @@ class BenchmarkRunner:
         
         # Initialize judge provider once for this task execution
         if not hasattr(self, '_judge_provider') or self._judge_provider is None:
-            azure_client = AsyncAzureOpenAI(
-                azure_endpoint=os.getenv("AZURE_OPENAI_ENDPOINT"),
-                api_key=os.getenv("AZURE_OPENAI_API_KEY"),
-                api_version=config_loader.get_azure_api_version()
+            # azure_client = AsyncAzureOpenAI(
+            #     azure_endpoint=os.getenv("AZURE_OPENAI_ENDPOINT"),
+            #     api_key=os.getenv("AZURE_OPENAI_API_KEY"),
+            #     api_version=config_loader.get_azure_api_version()
+            # )
+            # self._judge_provider = LLMProvider(azure_client, "o4-mini", "azure")
+            from openai import AsyncOpenAI
+            openrouter_client = AsyncOpenAI(
+                api_key=os.getenv("OPENROUTER_API_KEY"),
+                # base_url="https://openrouter.ai/api/v1"
+                base_url ="http://localhost:11434/v1",
             )
-            self._judge_provider = LLMProvider(azure_client, "o4-mini", "azure")
+            # self._judge_provider = LLMProvider(openrouter_client, "openai/o4-mini", "openrouter")
+            self._judge_provider = LLMProvider(openrouter_client, "qwen3.5:9b", "openrouter")
         
         # Step 1: Prepare task execution information
         task_execution_info = await self._prepare_task_execution(task_info)
@@ -801,7 +810,7 @@ class BenchmarkRunner:
         """Prepare basic task execution information"""
         task_data = task_info.get('task', {})
         server_name = task_info.get('server_name', '')
-        
+
         if self.use_fuzzy_descriptions:
             task_description = task_data.get('fuzzy_description', task_data.get('task_description', ''))
         else:
@@ -860,7 +869,7 @@ class BenchmarkRunner:
         
         # Add resident servers
         resident_server_names = ["Time MCP"]
-        existing_server_names = [cfg['name'] for cfg in server_configs]
+        existing_server_names = [cfg['name'] for cfg in server_configs] 
         
         for resident_name in resident_server_names:
             if resident_name not in existing_server_names and resident_name in self.commands_config:
@@ -1310,7 +1319,7 @@ async def main():
     _print_configuration(selected_models, available_models, runner, args)
     
     # Step 5: Run benchmark
-    task_limit = None
+    task_limit = 1
     try:
         logger.info("Starting multi-model benchmark execution...")
         results = await runner.run_benchmark(
