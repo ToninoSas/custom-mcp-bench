@@ -76,7 +76,7 @@ execution:
 # Benchmark runtime configuration
 benchmark:
   # Default distraction server count
-  distraction_servers_default: 10
+  distraction_servers_default: 5
   # Resident server list (always available servers)
   resident_servers:
     - "Time MCP"
