@@ -81,7 +81,7 @@ install_nodejs() {
         "linux")
             # Install using NodeSource repository for latest LTS
             curl -fsSL https://deb.nodesource.com/setup_lts.x | sudo -E bash -
-            sudo dnf install -y nodejs
+            sudo apt-get install -y nodejs
             ;;
         "windows")
             log_warning "Please install Node.js manually from https://nodejs.org/ (version 18 or higher)"
@@ -124,7 +124,7 @@ install_python() {
             ;;
         "linux")
             #sudo apt-get update
-            sudo dnf install -y python3.11 python3.11-pip python3.11-venv
+            sudo apt-get install -y python3.11 python3.11-pip python3.11-venv
             ;;
         "windows")
             log_warning "Please install Python 3.11+ manually from https://python.org/"
@@ -208,7 +208,7 @@ install_system_dependencies() {
             ;;
         "linux")
             #sudo apt-get update
-            sudo dnf install -y git curl wget build-essential gcc
+            sudo apt-get install -y git curl wget build-essential gcc
             ;;
         "windows")
             log_warning "Please ensure git, curl, and build tools are installed"
