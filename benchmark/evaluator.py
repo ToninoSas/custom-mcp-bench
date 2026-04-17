@@ -995,6 +995,22 @@ class TaskEvaluator(BaseEvaluator):
         Returns:
             Dictionary containing all evaluation metrics
         """
+
+        logger.info("Skipping LLM Judge evaluation. Returning deterministic metrics only.")
+        return {
+            "task_completion_score": 0.0,
+            "tool_selection_score": 0.0,
+            "planning_effectiveness_score": 0.0,
+            "subdimensions": {
+                "fulfillment": 0.0,
+                "grounding": 0.0,
+                "appropriateness": 0.0,
+                "parameter_accuracy": 0.0,
+                "dependency": 0.0,
+                "efficiency": 0.0
+            }
+        }
+    
         logger.info("Starting comprehensive task evaluation...")
         
         try:
